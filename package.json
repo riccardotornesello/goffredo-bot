@@ -12,6 +12,8 @@
     "@mantine/hooks": "^6.0.17",
     "@mantine/next": "^6.0.17",
     "@nrwl/next": "15.4.2",
+    "axios": "^1.4.0",
+    "cookies": "^0.8.0",
     "core-js": "^3.6.5",
     "jsonwebtoken": "^9.0.1",
     "next": "13.0.0",
