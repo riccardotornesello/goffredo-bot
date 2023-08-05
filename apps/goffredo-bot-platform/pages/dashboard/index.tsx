@@ -37,8 +37,6 @@ export async function getServerSideProps({ req, res, query }) {
 }
 
 export default function DashboardPage({ user, sounds }) {
-  console.log(user);
-
   return (
     <div>
       <p>Username: {user.username}</p>
