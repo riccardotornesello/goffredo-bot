@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default {
-  displayName: 'goffredo-bot-frontend',
+  displayName: 'goffredo-bot-platform',
   preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nrwl/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nrwl/next/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/apps/goffredo-bot-frontend',
+  coverageDirectory: '../../coverage/apps/goffredo-bot-platform',
 };

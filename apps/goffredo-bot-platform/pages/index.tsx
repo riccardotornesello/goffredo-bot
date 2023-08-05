@@ -13,7 +13,7 @@ export function Index() {
           <div id="welcome">
             <h1>
               <span> Hello there, </span>
-              Welcome goffredo-bot-frontend 👋
+              Welcome goffredo-bot-platform 👋
             </h1>
           </div>
 
