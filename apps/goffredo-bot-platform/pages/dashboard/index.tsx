@@ -1,7 +1,9 @@
 import axios from 'axios';
 import Cookies from 'cookies';
 import { DISCORD_API_BASE_URL } from '../../data/constants';
-import { headers } from 'apps/goffredo-bot-platform/next.config';
+import SoundsTable from '../../components/sounds-table';
+import { getUserSounds } from 'apps/goffredo-bot-platform/database/sounds';
+import { initDb } from 'apps/goffredo-bot-platform/database/init';
 
 export async function getServerSideProps({ req, res, query }) {
   const cookies = new Cookies(req, res);
@@ -20,7 +22,10 @@ export async function getServerSideProps({ req, res, query }) {
     const res = await axios.get(`${DISCORD_API_BASE_URL}/users/@me`, {
       headers: { Authorization: `Bearer ${authToken}` },
     });
-    return { props: { user: res.data } };
+
+    const sounds = await getUserSounds(res.data.id);
+
+    return { props: { user: res.data, sounds: sounds } };
   } catch (e) {
     cookies.set('auth');
     return {
@@ -32,10 +37,14 @@ export async function getServerSideProps({ req, res, query }) {
   }
 }
 
-export default function DashboardPage({ user }) {
+export default function DashboardPage({ user, sounds }) {
+  console.log(user);
+
   return (
     <div>
       <p>Username: {user.username}</p>
+      <p>User id: {user.id}</p>
+      <SoundsTable sounds={sounds} />
     </div>
   );
 }

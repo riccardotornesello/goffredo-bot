@@ -29,3 +29,18 @@ export const getRandomSound = (userId) =>
       }
     );
   });
+
+export const getUserSounds = (userId) =>
+  new Promise((res, rej) => {
+    db.all(
+      'SELECT id, name FROM sound WHERE user_id = ? ORDER BY id;',
+      [userId],
+      (err, rows) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(rows);
+        }
+      }
+    );
+  });
