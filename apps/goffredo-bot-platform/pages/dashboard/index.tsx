@@ -1,9 +1,8 @@
 import axios from 'axios';
 import Cookies from 'cookies';
-import { DISCORD_API_BASE_URL } from '../../data/constants';
+import { DISCORD_API_BASE_URL } from '../../data';
 import SoundsTable from '../../components/sounds-table';
 import { getUserSounds } from 'apps/goffredo-bot-platform/database/sounds';
-import { initDb } from 'apps/goffredo-bot-platform/database/init';
 
 export async function getServerSideProps({ req, res, query }) {
   const cookies = new Cookies(req, res);

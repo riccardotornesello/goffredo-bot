@@ -5,7 +5,7 @@ import {
   FRONTEND_BASE_URL,
   DISCORD_API_BASE_URL,
   OAUTH2_CLIENT_SECRET,
-} from '../data/constants';
+} from '../data';
 import axios from 'axios';
 
 export function generateDiscordOauthUrl() {
