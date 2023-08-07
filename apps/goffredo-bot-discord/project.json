@@ -1,0 +1,60 @@
+{
+  "name": "goffredo-bot-discord",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/goffredo-bot-discord/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/goffredo-bot-discord",
+        "main": "apps/goffredo-bot-discord/src/main.ts",
+        "tsConfig": "apps/goffredo-bot-discord/tsconfig.app.json",
+        "assets": ["apps/goffredo-bot-discord/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/goffredo-bot-discord/src/environments/environment.ts",
+              "with": "apps/goffredo-bot-discord/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "goffredo-bot-discord:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "goffredo-bot-discord:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/goffredo-bot-discord/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/goffredo-bot-discord/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
