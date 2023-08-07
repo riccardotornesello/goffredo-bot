@@ -8,7 +8,7 @@ export async function getServerSideProps({ req, res, query }) {
 
   if (discordToken) {
     cookies.set('auth', discordToken.access_token, {
-      maxAge: discordToken.expires_in,
+      maxAge: discordToken.expires_in * 1000 - 1000,
       httpOnly: true,
     });
 
