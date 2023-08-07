@@ -15,9 +15,15 @@ function stopPlaying(
   connection: VoiceConnection,
   audioPlayer: AudioPlayer
 ) {
-  audioPlayer.stop();
-  subscription.unsubscribe();
-  connection.destroy();
+  try {
+    audioPlayer.stop();
+  } catch (e) {}
+  try {
+    subscription.unsubscribe();
+  } catch (e) {}
+  try {
+    connection.destroy();
+  } catch (e) {}
 }
 
 const client = new Client({
@@ -56,9 +62,9 @@ client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
   });
 
   // Stop playing after 15 seconds (just in case)
-  setTimeout(() => {
-    stopPlaying(subscription, connection, audioPlayer);
-  }, 15_000);
+  // setTimeout(() => {
+  //   stopPlaying(subscription, connection, audioPlayer);
+  // }, 15_000);
 });
 
 client.login(BOT_TOKEN);
