@@ -3,8 +3,9 @@ import Cookies from 'cookies';
 import { DISCORD_API_BASE_URL } from '../../data';
 import SoundsTable from '../../components/sounds-table';
 import { getUserSounds } from 'apps/goffredo-bot-platform/database/sounds';
+import SoundUploadForm from '../../components/sound-upload-form';
 
-export async function getServerSideProps({ req, res, query }) {
+export async function getServerSideProps({ req, res }) {
   const cookies = new Cookies(req, res);
   const authToken = cookies.get('auth');
 
@@ -17,14 +18,11 @@ export async function getServerSideProps({ req, res, query }) {
     };
   }
 
+  let userRes;
   try {
-    const res = await axios.get(`${DISCORD_API_BASE_URL}/users/@me`, {
+    userRes = await axios.get(`${DISCORD_API_BASE_URL}/users/@me`, {
       headers: { Authorization: `Bearer ${authToken}` },
     });
-
-    const sounds = await getUserSounds(res.data.id);
-
-    return { props: { user: res.data, sounds: sounds } };
   } catch (e) {
     cookies.set('auth');
     return {
@@ -34,6 +32,10 @@ export async function getServerSideProps({ req, res, query }) {
       },
     };
   }
+
+  const sounds = await getUserSounds(userRes.data.id);
+
+  return { props: { user: userRes.data, sounds: sounds } };
 }
 
 export default function DashboardPage({ user, sounds }) {
@@ -42,6 +44,7 @@ export default function DashboardPage({ user, sounds }) {
       <p>Username: {user.username}</p>
       <p>User id: {user.id}</p>
       <SoundsTable sounds={sounds} />
+      <SoundUploadForm />
     </div>
   );
 }
