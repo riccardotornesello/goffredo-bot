@@ -2,8 +2,8 @@ import formidable from 'formidable';
 import axios from 'axios';
 import Cookies from 'cookies';
 import { DISCORD_API_BASE_URL } from '../../data';
-import { addSound } from '../../database/sounds';
 import fs from 'fs';
+import { addSound } from '@goffredo-bot/database';
 
 export const config = {
   api: {
