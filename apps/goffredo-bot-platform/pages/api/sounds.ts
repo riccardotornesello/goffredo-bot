@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'cookies';
 import { DISCORD_API_BASE_URL } from '../../data';
 import fs from 'fs';
-import { addSound } from '@goffredo-bot/database';
+import { addSound, AppDataSource } from '@goffredo-bot/database';
 
 export const config = {
   api: {
@@ -12,6 +12,8 @@ export const config = {
 };
 
 export async function post(req, res) {
+  await AppDataSource.initialize();
+
   const form = formidable({ multiples: true });
   const cookies = new Cookies(req, res);
 
