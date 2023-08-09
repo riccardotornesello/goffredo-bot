@@ -37,7 +37,7 @@ export async function post(req, res) {
     return res.status(401).end();
   }
 
-  const { fields, files } = await formData;
+  const { fields, files } = await formData as any;
 
   const soundId = await addSound({
     userId: userRes.data.id,
