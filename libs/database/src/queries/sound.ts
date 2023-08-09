@@ -21,3 +21,12 @@ export async function addSound({ userId, name }): Promise<string> {
   const res = await AppDataSource.getRepository(Sound).save(sound);
   return res.id;
 }
+
+export async function getUserRandomSound(userId: string): Promise<string> {
+  const res = await AppDataSource.getRepository(Sound)
+    .createQueryBuilder()
+    .orderBy('RANDOM()')
+    .limit(1)
+    .getOne();
+  return res ? res.id : null;
+}

@@ -9,6 +9,7 @@ import {
   PlayerSubscription,
   AudioPlayer,
 } from '@discordjs/voice';
+import { getUserRandomSound, AppDataSource } from '@goffredo-bot/database';
 
 function stopPlaying(
   subscription: PlayerSubscription,
@@ -26,45 +27,54 @@ function stopPlaying(
   } catch (e) {}
 }
 
-const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
-});
+async function run() {
+  await AppDataSource.initialize();
 
-client.once(Events.ClientReady, (c) => {
-  console.log(`Ready! Logged in as ${c.user.tag}`);
-});
-
-client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
-  // Exclude bot
-  if (newState.member?.user.bot) return;
-
-  // Exclude if not joining a channel
-  if (oldState.channelId !== null) return;
-
-  // Join the voice channel
-  const connection = joinVoiceChannel({
-    channelId: newState.channel.id,
-    guildId: newState.channel.guild.id,
-    adapterCreator: newState.channel.guild.voiceAdapterCreator,
+  const client = new Client({
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
   });
 
-  // Prepare the audio player
-  const audioPlayer = createAudioPlayer();
-  const resource = createAudioResource('paperissima-sprint.mp3');
-  audioPlayer.play(resource);
-
-  // Start playing
-  const subscription = connection.subscribe(audioPlayer);
-
-  // Stop playing when the audio is finished
-  audioPlayer.on(AudioPlayerStatus.Idle, () => {
-    stopPlaying(subscription, connection, audioPlayer);
+  client.once(Events.ClientReady, (c) => {
+    console.log(`Ready! Logged in as ${c.user.tag}`);
   });
 
-  // Stop playing after 15 seconds (just in case)
-  // setTimeout(() => {
-  //   stopPlaying(subscription, connection, audioPlayer);
-  // }, 15_000);
-});
+  client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
+    // Exclude bot
+    if (newState.member?.user.bot) return;
 
-client.login(BOT_TOKEN);
+    // Exclude if not joining a channel
+    if (oldState.channelId !== null) return;
+
+    const soundId = await getUserRandomSound(newState.member.id);
+    if (!soundId) return;
+
+    // Join the voice channel
+    const connection = joinVoiceChannel({
+      channelId: newState.channel.id,
+      guildId: newState.channel.guild.id,
+      adapterCreator: newState.channel.guild.voiceAdapterCreator,
+    });
+
+    // Prepare the audio player
+    const audioPlayer = createAudioPlayer();
+    const resource = createAudioResource(`./data/sounds/${soundId}.mp3`);
+    audioPlayer.play(resource);
+
+    // Start playing
+    const subscription = connection.subscribe(audioPlayer);
+
+    // Stop playing when the audio is finished
+    audioPlayer.on(AudioPlayerStatus.Idle, () => {
+      stopPlaying(subscription, connection, audioPlayer);
+    });
+
+    // Stop playing after 15 seconds (just in case)
+    // setTimeout(() => {
+    //   stopPlaying(subscription, connection, audioPlayer);
+    // }, 15_000);
+  });
+
+  client.login(BOT_TOKEN);
+}
+
+run();
