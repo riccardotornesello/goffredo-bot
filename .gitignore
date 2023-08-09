@@ -1,6 +1,3 @@
-*.sqlite
-.env
-
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
@@ -43,3 +40,9 @@ Thumbs.db
 
 # Next.js
 .next
+
+# Extra
+*.sqlite
+.env
+data/*
+!.gitkeep
