@@ -12,7 +12,9 @@ export const config = {
 };
 
 export async function post(req, res) {
-  await AppDataSource.initialize();
+  try {
+    await AppDataSource.initialize();
+  } catch (e) {}
 
   const form = formidable({ multiples: true });
   const cookies = new Cookies(req, res);
@@ -37,7 +39,7 @@ export async function post(req, res) {
     return res.status(401).end();
   }
 
-  const { fields, files } = await formData as any;
+  const { fields, files } = (await formData) as any;
 
   const soundId = await addSound({
     userId: userRes.data.id,

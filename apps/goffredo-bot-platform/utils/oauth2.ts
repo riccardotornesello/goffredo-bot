@@ -2,24 +2,23 @@ import 'axios';
 import {
   OAUTH2_CLIENT_ID,
   OAUTH2_SCOPES,
-  FRONTEND_BASE_URL,
   DISCORD_API_BASE_URL,
   OAUTH2_CLIENT_SECRET,
 } from '../data';
 import axios from 'axios';
 
-export function generateDiscordOauthUrl() {
+export function generateDiscordOauthUrl(baseUrl: string) {
   const url = new URL('https://discord.com/api/oauth2/authorize');
 
   url.searchParams.append('client_id', OAUTH2_CLIENT_ID);
-  url.searchParams.append('redirect_uri', `${FRONTEND_BASE_URL}/auth/callback`);
+  url.searchParams.append('redirect_uri', `${baseUrl}/auth/callback`);
   url.searchParams.append('response_type', 'code');
   url.searchParams.append('scope', OAUTH2_SCOPES);
 
   return url.href;
 }
 
-export async function exchangeDiscordCode(code) {
+export async function exchangeDiscordCode(baseUrl: string, code: string) {
   try {
     const res = await axios.post(
       `${DISCORD_API_BASE_URL}/oauth2/token`,
@@ -28,7 +27,7 @@ export async function exchangeDiscordCode(code) {
         client_secret: OAUTH2_CLIENT_SECRET,
         grant_type: 'authorization_code',
         code: code,
-        redirect_uri: `${FRONTEND_BASE_URL}/auth/callback`,
+        redirect_uri: `${baseUrl}/auth/callback`,
       },
       {
         headers: {

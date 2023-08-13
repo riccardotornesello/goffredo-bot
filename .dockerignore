@@ -46,3 +46,7 @@ Thumbs.db
 .env
 data/*
 !.gitkeep
+
+# Infrastructure
+/docker/
+docker-compose.yml

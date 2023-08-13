@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  platform:
+    image: riccardotornesello/goffredobot-platform
+    build:
+      dockerfile: docker/Dockerfile.platform
+      context: .
+    ports:
+      - 3000:3000
+    environment:
+      - OAUTH2_CLIENT_ID=${OAUTH2_CLIENT_ID}
+      - OAUTH2_CLIENT_SECRET=${OAUTH2_CLIENT_SECRET}
+    volumes:
+      - ./data/sounds:/app/data/sounds:rw
+      - ./data/db:/app/data/db:rw
+
+  discord:
+    image: riccardotornesello/goffredobot-discord
+    build:
+      dockerfile: docker/Dockerfile.discord
+      context: .
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+    volumes:
+      - ./data/sounds:/app/data/sounds:ro
+      - ./data/db:/app/data/db:rw

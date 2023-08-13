@@ -6,7 +6,9 @@ import { getUserSounds, AppDataSource } from '@goffredo-bot/database';
 import SoundUploadForm from '../../components/sound-upload-form';
 
 export async function getServerSideProps({ req, res }) {
-  await AppDataSource.initialize();
+  try {
+    await AppDataSource.initialize();
+  } catch (e) {}
 
   const cookies = new Cookies(req, res);
   const authToken = cookies.get('auth');

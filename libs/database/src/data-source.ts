@@ -4,7 +4,7 @@ import { Sound } from './entity';
 
 export const AppDataSource = new DataSource({
   type: 'sqlite',
-  database: 'database.sqlite',
+  database: 'data/db/database.sqlite',
   synchronize: true,
   logging: false,
   entities: [Sound],
