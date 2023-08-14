@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('goffredo-bot-platform', () => {
+describe('goffredobot-platform', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
@@ -8,6 +8,6 @@ describe('goffredo-bot-platform', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome goffredo-bot-platform');
+    getGreeting().contains('Welcome goffredobot-platform');
   });
 });

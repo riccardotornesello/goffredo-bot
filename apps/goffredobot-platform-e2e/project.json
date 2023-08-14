@@ -1,19 +1,19 @@
 {
-  "name": "goffredo-bot-platform-e2e",
+  "name": "goffredobot-platform-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/goffredo-bot-platform-e2e/src",
+  "sourceRoot": "apps/goffredobot-platform-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/goffredo-bot-platform-e2e/cypress.config.ts",
-        "devServerTarget": "goffredo-bot-platform:serve:development",
+        "cypressConfig": "apps/goffredobot-platform-e2e/cypress.config.ts",
+        "devServerTarget": "goffredobot-platform:serve:development",
         "testingType": "e2e"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "goffredo-bot-platform:serve:production"
+          "devServerTarget": "goffredobot-platform:serve:production"
         }
       }
     },
@@ -21,10 +21,10 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/goffredo-bot-platform-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/goffredobot-platform-e2e/**/*.{js,ts}"]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["goffredo-bot-platform"]
+  "implicitDependencies": ["goffredobot-platform"]
 }

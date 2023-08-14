@@ -9,7 +9,7 @@ import {
   PlayerSubscription,
   AudioPlayer,
 } from '@discordjs/voice';
-import { getUserRandomSound, AppDataSource } from '@goffredo-bot/database';
+import { getUserRandomSound, AppDataSource } from '@goffredobot/database';
 
 function stopPlaying(
   subscription: PlayerSubscription,

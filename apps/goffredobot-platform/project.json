@@ -1,7 +1,7 @@
 {
-  "name": "goffredo-bot-platform",
+  "name": "goffredobot-platform",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/goffredo-bot-platform",
+  "sourceRoot": "apps/goffredobot-platform",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,12 +9,12 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/goffredo-bot-platform",
-        "outputPath": "dist/apps/goffredo-bot-platform"
+        "root": "apps/goffredobot-platform",
+        "outputPath": "dist/apps/goffredobot-platform"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/goffredo-bot-platform"
+          "outputPath": "apps/goffredobot-platform"
         },
         "production": {}
       }
@@ -23,16 +23,16 @@
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "goffredo-bot-platform:build",
+        "buildTarget": "goffredobot-platform:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "goffredo-bot-platform:build:development",
+          "buildTarget": "goffredobot-platform:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "goffredo-bot-platform:build:production",
+          "buildTarget": "goffredobot-platform:build:production",
           "dev": false
         }
       }
@@ -40,14 +40,14 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "goffredo-bot-platform:build:production"
+        "buildTarget": "goffredobot-platform:build:production"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/goffredo-bot-platform/jest.config.ts",
+        "jestConfig": "apps/goffredobot-platform/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -55,7 +55,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/goffredo-bot-platform/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/goffredobot-platform/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },

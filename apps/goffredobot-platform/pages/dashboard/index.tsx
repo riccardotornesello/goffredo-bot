@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'cookies';
 import { DISCORD_API_BASE_URL } from '../../data';
 import SoundsTable from '../../components/sounds-table';
-import { getUserSounds, AppDataSource } from '@goffredo-bot/database';
+import { getUserSounds, AppDataSource } from '@goffredobot/database';
 import SoundUploadForm from '../../components/sound-upload-form';
 
 export async function getServerSideProps({ req, res }) {

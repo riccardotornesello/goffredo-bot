@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'cookies';
 import { DISCORD_API_BASE_URL } from '../../data';
 import fs from 'fs';
-import { addSound, AppDataSource } from '@goffredo-bot/database';
+import { addSound, AppDataSource } from '@goffredobot/database';
 
 export const config = {
   api: {
