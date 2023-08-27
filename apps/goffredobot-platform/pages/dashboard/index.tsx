@@ -1,5 +1,7 @@
 import axios from 'axios';
 import Cookies from 'cookies';
+import { extractBaseUrl } from '../../utils/url';
+import { generateDiscordOauthUrl } from '../../utils/oauth2';
 import { DISCORD_API_BASE_URL } from '../../data';
 import SoundsTable from '../../components/sounds-table';
 import { getUserSounds, AppDataSource } from '@goffredobot/database';
@@ -14,9 +16,10 @@ export async function getServerSideProps({ req, res }) {
   const authToken = cookies.get('auth');
 
   if (!authToken) {
+    const baseUrl = extractBaseUrl(req);
     return {
       redirect: {
-        destination: '/',
+        destination: generateDiscordOauthUrl(baseUrl),
         permanent: false,
       },
     };

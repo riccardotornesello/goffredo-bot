@@ -1,22 +1,11 @@
-import { generateDiscordOauthUrl } from '../utils/oauth2';
-import { extractBaseUrl } from '../utils/url';
-import { Anchor, Title } from '@mantine/core';
+import { Hero } from './components/hero/hero';
+import { How } from './components/how/how';
 
-export async function getServerSideProps({ req }) {
-  const baseUrl = extractBaseUrl(req);
-
-  return {
-    props: {
-      baseUrl,
-    },
-  };
-}
-
-export function Index({ baseUrl }) {
+export function Index() {
   return (
     <div>
-      <Anchor href={generateDiscordOauthUrl(baseUrl)}>Log in</Anchor>
-      <Title>A 💩 interface for a work in progress project</Title>
+      <Hero />
+      <How />
     </div>
   );
 }
